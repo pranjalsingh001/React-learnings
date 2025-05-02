@@ -1,33 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import Board from './board'
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  const api_url = "https://api.datamuse.com/words?sp=?????&max=1000"
+  const rows = 6
+  const [ansWord , setAnsWord]=useState('')
+  const [guesses , setGuesses]=useState(new Array(rows).fill(''))
+  
+
+
+  useEffect( () => {
+  const fetchData =  async ()=>{
+      try {
+        const res = await fetch(api_url)
+        const data = await res.json()
+        // converting array of objets into array of key.value
+        const letterArr= data.map(obj => obj.word)
+        const rendomWord = letterArr[Math.floor(Math.random()*letterArr.length)]
+        setAnsWord(rendomWord)
+      } catch (error) {
+        console.error("Error fetcing data" , error);
+      }
+    }
+    fetchData()
+  } , [])
+  
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>{ansWord}</h1>
+      <Board guesses={guesses}/>
     </>
   )
 }
