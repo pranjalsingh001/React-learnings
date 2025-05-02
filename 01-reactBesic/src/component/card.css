@@ -1,0 +1,25 @@
+*{
+    margin: 0;padding: 0;
+    box-sizing: border-box;
+}
+
+#div{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    margin: 1rem;
+    background-color: rgb(85, 59, 56);
+    border-radius: 20px;
+
+}
+
+img{
+    height: 200px;
+    width: 100px;
+    border-radius: 10%;
+}
