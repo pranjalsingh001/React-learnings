@@ -4,26 +4,50 @@
     box-sizing: border-box;
 }
 .board{
+    margin-top: 50px;
     display: flex;
-    flex-direction:roe ;
+    flex-direction:column ;
     justify-content: center;
+    align-items: center;
     gap: 10px
 }
 .boardRows{
-    display: flex;  
-    flex-direction: column;   
+    display: flex; 
     gap: 10px;
 }
 .boardCells{
     display: flex;
-    flex-direction: row;
     justify-content: center;
     gap: 10px;
     align-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
     border: 1px solid rgb(213, 200, 200);
     text-transform: uppercase;
     border-radius: .7rem;
     font-weight: bold;
 }
+
+.keyboard{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+.keyboardRows {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 5px 0;
+  }
+  
+  .keyLetters {
+    padding: 10px 15px;
+    background-color: #d3d6da;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    user-select: none;
+  }
+  

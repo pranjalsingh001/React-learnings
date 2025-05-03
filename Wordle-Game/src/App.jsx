@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import Board from './board'
+import Keyboard from './Keyboard.jsx'
+import Board from './board.jsx'
+
 
 function App() {
 
@@ -26,11 +28,14 @@ function App() {
     }
     fetchData()
   } , [])
+
+  
   
   return (
     <>
-      <h1>{ansWord}</h1>
       <Board guesses={guesses}/>
+      <Keyboard/>
+     
     </>
   )
 }
