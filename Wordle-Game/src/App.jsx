@@ -70,7 +70,8 @@ function App() {
   
   return (
     <>
-      <Board guesses={guesses}/>
+      {ansWord}
+      <Board guesses={guesses} currentRow={currentRow} currentWord={currentWord}/>
       <Keyboard/>
      
     </>
