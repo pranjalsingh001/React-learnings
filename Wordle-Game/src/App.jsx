@@ -14,7 +14,7 @@ function App() {
   const [currentRow , setCurrentRow]=useState(0)
   
 
-
+//fetch word from api
   useEffect( () => {
   const fetchData =  async ()=>{
       try {
@@ -23,14 +23,15 @@ function App() {
         // converting array of objets into array of key.value
         const letterArr= data.map(obj => obj.word)
         const rendomWord = letterArr[Math.floor(Math.random()*letterArr.length)]
-        setAnsWord(rendomWord)
+        setAnsWord(rendomWord.toUpperCase())
       } catch (error) {
         console.error("Error fetcing data" , error);
       }
     }
     fetchData()
   } , [])
-  
+ 
+//track the key when user typed and insret in the guesses array
   const hendelKeyEvent = useCallback((e) => {
     const {keyCode , key} = e
 
@@ -55,10 +56,7 @@ function App() {
       setCurrentWord((currentWord) => (currentWord + key.toUpperCase()))
       return
     }
-
-
   },[currentRow,currentWord])
-
   useEffect(() => {
     document.addEventListener('keydown',hendelKeyEvent)
   
@@ -67,11 +65,21 @@ function App() {
     }
   }, [hendelKeyEvent])
   
+//hendal win loos condition
+useEffect(() => {
+  ansWord===guesses[currentRow -1] && ansWord ? console.log('you win'):console.log('you loss');
   
+},[guesses,ansWord,currentRow]) 
+
   return (
     <>
       {ansWord}
-      <Board guesses={guesses} currentRow={currentRow} currentWord={currentWord}/>
+      <Board 
+        guesses={guesses} 
+        currentRow={currentRow} 
+        currentWord={currentWord} 
+        ansWord={ansWord}
+      />
       <Keyboard/>
      
     </>
