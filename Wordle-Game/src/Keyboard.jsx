@@ -1,21 +1,31 @@
-import React from 'react';
+const rows = ["QWERTYUIOP", "ASDFGHJKL+", "ZXCVBNM-"];
 
-function Keyboard() {
-  const letters = ['QWERTYUIOP', 'ASDFGHJKL+', 'ZXCVBNM-'];
+const getColor = (letter, ansWord, guesses) => {
+  const ind = ansWord.indexOf(letter);
+  if (ind === -1) return "wrong";
 
-  return (
-    <div className='keyboard'>
-      {letters.map((KeyboardRow, rowIndex) => (
-        <div key={rowIndex} className='keyboardRows'>
-          {KeyboardRow.split('').map((keyLetter, keyIndex) => (
-            <div key={keyIndex} className='keyLetters'>
-              {keyLetter === '+' ? 'Enter' : keyLetter === '-' ? 'Delete' : keyLetter}
-            </div>
-          ))}
-        </div>
-      ))}
-    </div>
-  );
-}
+  if (guesses.find((guess) => guess[ind] === letter)) return "correct";
+
+  return "semiCorrect";
+};
+
+const Keyboard = ({ letters, ansWord, guesses }) => (
+  <div className="keyboard">
+    {rows.map((row, rowIdx) => (
+      <div key={rowIdx} className="keyboardRow">
+        {row.split("").map((letter, letterIdx) => (
+          <div
+            key={letterIdx}
+            className={`keyboardLetter ${
+              letters.includes(letter) && getColor(letter, ansWord, guesses)
+            }`}
+          >
+            {letter === "+" ? "Enter" : letter === "-" ? "Delete" : letter}
+          </div>
+        ))}
+      </div>
+    ))}
+  </div>
+);
 
 export default Keyboard;
