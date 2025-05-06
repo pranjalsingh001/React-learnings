@@ -4,12 +4,17 @@ function InputBox({
     label,
     amount,
     onAmountChange,
-    selectCurrency='usd',
+    selectCurrency = 'usd',
     onCurrencyChange,
-    currencyOptions=[]
+    currencyOptions = [],
+    amountDisabled = false,
+    
 }) {
 
     const ID=useId('')
+
+    // console.log(currencyOptions);
+    
 
     return (
         <div className={`bg-white p-3 rounded-lg text-sm flex `}>
@@ -25,7 +30,8 @@ function InputBox({
                     placeholder="Amount"
                     id= {ID}
                     value={amount}
-                    onChange={(e)=> (onAmountChange && onAmountChange(e.target.value))}
+                    onChange={(e)=> (onAmountChange(e.target.value))}
+                    disabled={amountDisabled}
 
                 />
             </div>
@@ -34,14 +40,14 @@ function InputBox({
                 <select
                     className="rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none"
                     value={selectCurrency}
-                    onChange={(e) => (onCurrencyChange && onCurrencyChange(e.target.value))}
+                    onChange={(e) => (onCurrencyChange(e.target.value))}
                 >
                     
-                    {currencyOptions.map((currency)=>{
-                        <option key={currency} value="usd">
-                            {currencyOptions}
+                    {currencyOptions.map((currency,idx)=>(
+                        <option key={idx} value={currency}>
+                            {currency}
                         </option>
-                    })}
+                    ))}
                 
                 </select>
             </div>
